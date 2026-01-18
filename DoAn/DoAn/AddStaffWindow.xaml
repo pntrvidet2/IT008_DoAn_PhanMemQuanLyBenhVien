@@ -1,0 +1,86 @@
+﻿<Window x:Class="DoAn.Windows.AddStaffWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Thêm tài khoản" Height="550" Width="400"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner">
+    <Border Background="White" CornerRadius="20" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
+        </Border.Effect>
+        <Grid Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="THÊM TÀI KHOẢN MỚI" FontSize="20" FontWeight="Bold" Foreground="#0369A1" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Mã tài khoản (Tự động)" Foreground="#94A3B8" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtAccID" Height="38" IsEnabled="False" Background="#F1F5F9" VerticalContentAlignment="Center" Padding="10,0" Margin="0,0,0,15">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="#CBD5E1" BorderThickness="1">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+
+                <TextBlock Text="Tên đăng nhập" Foreground="#64748B" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                <TextBox x:Name="txtUser" Height="38" VerticalContentAlignment="Center" Padding="10,0" Margin="0,0,0,15">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border CornerRadius="10" BorderBrush="#CBD5E1" BorderThickness="1" Background="White">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+
+                <TextBlock Text="Mật khẩu" Foreground="#64748B" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                <PasswordBox x:Name="txtPass" Height="38" VerticalContentAlignment="Center" Padding="10,0" Margin="0,0,0,15">
+                    <PasswordBox.Template>
+                        <ControlTemplate TargetType="PasswordBox">
+                            <Border CornerRadius="10" BorderBrush="#CBD5E1" BorderThickness="1" Background="White">
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Border>
+                        </ControlTemplate>
+                    </PasswordBox.Template>
+                </PasswordBox>
+
+                <TextBlock Text="Loại tài khoản" Foreground="#64748B" Margin="0,0,0,5" FontWeight="SemiBold"/>
+                <ComboBox x:Name="cboRole" Height="38" VerticalContentAlignment="Center" Margin="0,0,0,15"/>
+
+                <TextBlock Text="Trạng thái: Active (Tự động)" Foreground="#10B981" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="HỦY" Grid.Column="0" Margin="5" Height="40" Background="#F1F5F9" Foreground="#64748B" Click="Cancel_Click" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="12" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Content="LƯU TÀI KHOẢN" Grid.Column="1" Margin="5" Height="40" Background="#0369A1" Foreground="White" Click="Save_Click" FontWeight="Bold" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="12" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

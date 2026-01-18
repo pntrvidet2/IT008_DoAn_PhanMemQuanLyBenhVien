@@ -1,0 +1,159 @@
+﻿<Window x:Class="DoAn.MainWindowPatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HỆ THỐNG BỆNH NHÂN" WindowStyle="None" ResizeMode="NoResize"
+        Height="720" Width="1250" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="Transparent"
+        UseLayoutRounding="True" SnapsToDevicePixels="True">
+
+    <Window.Resources>
+        <Style x:Key="MenuBtn" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#475569"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="12">
+                            <ContentPresenter VerticalAlignment="Center" Margin="20,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#E0F2FE"/>
+                                <Setter Property="Foreground" Value="#0369A1"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#F1F5F9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Margin="15">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" Direction="-90" Opacity="0.2"/>
+        </Border.Effect>
+
+        <Border CornerRadius="20" Background="White" ClipToBounds="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="0,0,1,0">
+                    <StackPanel>
+                        <StackPanel Margin="0,40,0,40">
+                            <Grid HorizontalAlignment="Center">
+                                <Ellipse Width="90" Height="90" Stroke="#2E78A6" StrokeThickness="2" Fill="White"/>
+                                <TextBlock Text="👤" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#2E78A6"/>
+                            </Grid>
+                            <TextBlock x:Name="txtPatientName" Text="Họ tên Bệnh nhân" FontSize="18" FontWeight="Bold" Foreground="#1E293B" HorizontalAlignment="Center" Margin="0,15,0,5"/>
+                            <TextBlock Text="CỔNG THÔNG TIN SỨC KHỎE" FontSize="10" Foreground="#0369A1" FontWeight="Bold" HorizontalAlignment="Center" Opacity="0.8"/>
+                        </StackPanel>
+
+                        <Separator Margin="20,0" Background="#E2E8F0"/>
+
+                        <StackPanel Margin="0,20">
+                            <ToggleButton x:Name="btnHome" Click="Menu_Click" Style="{StaticResource MenuBtn}" IsChecked="True">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🏠" FontSize="18" Margin="0,0,15,0"/>
+                                    <TextBlock Text="Trang chủ" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ToggleButton>
+
+                            <ToggleButton x:Name="btnBilling" Click="Menu_Click" Style="{StaticResource MenuBtn}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="💳" FontSize="18" Margin="0,0,15,0"/>
+                                    <TextBlock Text="Thanh toán" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ToggleButton>
+
+                            <ToggleButton x:Name="btnInfo" Click="Menu_Click" Style="{StaticResource MenuBtn}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📑" FontSize="18" Margin="0,0,15,0"/>
+                                    <TextBlock Text="Hồ sơ cá nhân" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ToggleButton>
+                        </StackPanel>
+
+                        <Button x:Name="btnLogOut" Click="btnLogOut_Click" Background="Transparent" BorderThickness="0" Foreground="#EF4444" Margin="30,80,0,0" HorizontalAlignment="Left" Cursor="Hand">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🚪" Margin="0,0,10,0" FontWeight="Bold"/>
+                                <TextBlock Text="ĐĂNG XUẤT" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Background="#2E78A6" MouseLeftButtonDown="TopBar_MouseLeftButtonDown">
+                        <Grid Margin="25,0">
+                            <TextBlock Text="BẢNG ĐIỀU KHIỂN BỆNH NHÂN" Foreground="White" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="—" Width="40" Background="Transparent" Foreground="White" BorderThickness="0" Click="Min_Click" FontSize="18"/>
+                                <Button Content="☐" Width="40" Background="Transparent" Foreground="White" BorderThickness="0" Click="Max_Click" FontSize="18"/>
+                                <Button Content="✕" Width="40" Background="Transparent" Foreground="White" BorderThickness="0" Click="Close_Click" FontSize="16"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Row="1" Background="#F1F5F9">
+                        <Border x:Name="brdDashboard" Visibility="Visible" Margin="20" Background="White" CornerRadius="15">
+                            <Grid Margin="25">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="TỔNG QUAN TÀI KHOẢN" FontSize="18" FontWeight="Bold" Foreground="#1E293B" Margin="0,0,0,25"/>
+
+                                <UniformGrid Grid.Row="1" Columns="2" Rows="2">
+                                    <Border Background="#F0FDF4" Margin="10" CornerRadius="15" BorderBrush="#DCFCE7" BorderThickness="1">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="HÓA ĐƠN CẦN THANH TOÁN" HorizontalAlignment="Center" Foreground="#15803D" FontWeight="Bold"/>
+                                            <TextBlock x:Name="txtStatBill" Text="0" FontSize="45" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#15803D" Margin="0,10,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Background="#EFF6FF" Margin="10" CornerRadius="15" BorderBrush="#DBEAFE" BorderThickness="1">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="LỊCH HẸN TÁI KHÁM" HorizontalAlignment="Center" Foreground="#1D4ED8" FontWeight="Bold"/>
+                                            <TextBlock x:Name="txtStatAppt" Text="Chưa có" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#1D4ED8" Margin="0,10,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Background="#FFF7ED" Margin="10" CornerRadius="15" BorderBrush="#FFEDD5" BorderThickness="1">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="TÌNH TRẠNG HIỆN TẠI" HorizontalAlignment="Center" Foreground="#C2410C" FontWeight="Bold"/>
+                                            <TextBlock x:Name="txtStatCondition" Text="Đang theo dõi" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#C2410C" Margin="0,10,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Background="#F8FAFC" Margin="10" CornerRadius="15" BorderBrush="#E2E8F0" BorderThickness="1">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="GIỜ HỆ THỐNG" HorizontalAlignment="Center" Foreground="#475569" FontWeight="Bold"/>
+                                            <TextBlock x:Name="txtClock" Text="00:00:00" FontSize="35" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#475569" Margin="0,10,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </UniformGrid>
+                            </Grid>
+                        </Border>
+
+                        <Border x:Name="brdFrameContainer" Visibility="Collapsed" Margin="20" Background="White" CornerRadius="15" Padding="10">
+                            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
