@@ -1,0 +1,245 @@
+﻿<Window x:Class="DoAn.MainWindowHR"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="QUẢN LÝ NHÂN SỰ" WindowStyle="None" ResizeMode="NoResize"
+        Height="750" Width="1250" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="Transparent">
+
+    <Window.Resources>
+        <Style x:Key="HRMenuBtn" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#475569"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="BdHR" Background="{TemplateBinding Background}" CornerRadius="12" Margin="5,2">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="BdHR" Property="Background" Value="#E0F2FE"/>
+                                <Setter Property="Foreground" Value="#0369A1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoundedBtn" TargetType="Button">
+            <Setter Property="Background" Value="#2E78A6"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Margin="15" CornerRadius="25" Background="White">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" Opacity="0.15" ShadowDepth="0"/>
+        </Border.Effect>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="#F8FAFC" CornerRadius="25,0,0,25" BorderBrush="#F1F5F9" BorderThickness="0,0,1,0">
+                <DockPanel Margin="10">
+
+                    <StackPanel DockPanel.Dock="Top" Margin="0,15,0,20">
+                        <Grid Width="85" Height="85" HorizontalAlignment="Center">
+                            <Ellipse Stroke="#2E78A6" StrokeThickness="2" Fill="White">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                                </Ellipse.Effect>
+                            </Ellipse>
+                            <TextBlock Text="👤" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#2E78A6"/>
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="imgAvatarBrush" Stretch="UniformToFill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+
+                        <TextBlock x:Name="txtHRUsername" 
+                                   Text="QUẢN TRỊ VIÊN" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,12,0,0" 
+                                   FontWeight="Bold" 
+                                   Foreground="#1E293B" 
+                                   FontSize="15"/>
+
+                        <TextBlock Text="Phòng Nhân Sự" 
+                                   HorizontalAlignment="Center" 
+                                   Foreground="#64748B" 
+                                   FontSize="11" 
+                                   Margin="0,2,0,0"/>
+
+                        <Separator Background="#E2E8F0" Margin="20,15,20,0"/>
+                    </StackPanel>
+
+                    <Button DockPanel.Dock="Bottom" Click="HRLogOut_Click" Background="Transparent" BorderThickness="0" Foreground="#EF4444" FontWeight="Bold" Margin="15,0,0,15" HorizontalAlignment="Left" Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="🚪" Margin="0,0,10,0"/>
+                            <TextBlock Text="ĐĂNG XUẤT"/>
+                        </StackPanel>
+                    </Button>
+
+                    <StackPanel>
+                        <ToggleButton x:Name="btnHRHome" Click="HRMenu_Click" Style="{StaticResource HRMenuBtn}" Height="50" IsChecked="True">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📊" Margin="0,0,15,0"/>
+                                <TextBlock Text="Tổng Quan" FontWeight="Bold"/>
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton x:Name="btnHRNhanVien" Click="HRMenu_Click" Style="{StaticResource HRMenuBtn}" Height="50">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="👥" Margin="0,0,15,0"/>
+                                <TextBlock Text="Danh Sách Nhân Viên" FontWeight="Bold"/>
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton x:Name="btnHRBacSi" Click="HRMenu_Click" Style="{StaticResource HRMenuBtn}" Height="50">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="👨‍⚕️" Margin="0,0,15,0"/>
+                                <TextBlock Text="Danh Sách Bác Sĩ" FontWeight="Bold"/>
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton x:Name="btnHRKhoa" Click="HRMenu_Click" Style="{StaticResource HRMenuBtn}" Height="50">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🏥" Margin="0,0,15,0"/>
+                                <TextBlock Text="Danh Sách Khoa" FontWeight="Bold"/>
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="#2E78A6" CornerRadius="0,25,0,0" MouseLeftButtonDown="TopBar_MouseLeftButtonDown">
+                    <Grid Margin="20,0">
+                        <TextBlock Text="HỆ THỐNG QUẢN TRỊ NHÂN SỰ" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="—" Width="46" Height="32" Background="Transparent" Foreground="White" BorderThickness="0" Click="Min_Click" FontSize="14" Cursor="Hand"/>
+                            <Button x:Name="btnMax" Content="☐" Width="46" Height="32" Background="Transparent" Foreground="White" BorderThickness="0" Click="Max_Click" FontSize="16" Cursor="Hand"/>
+                            <Button Content="✕" Width="46" Height="32" Background="Transparent" Foreground="White" BorderThickness="0" Click="Close_Click" FontSize="14" Cursor="Hand">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#E81123"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="1" Margin="20">
+                    <Border x:Name="brdDashboard" Background="White" CornerRadius="15">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="200"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="BIỂU ĐỒ CƠ CẤU NHÂN SỰ" FontWeight="Bold" Foreground="#1E293B" Margin="0,0,0,15"/>
+                            <Border Grid.Row="1" Background="#F8FAFC" CornerRadius="15" Padding="10">
+                                <UniformGrid Columns="4">
+                                    <StackPanel VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="txtVal1" Text="0" HorizontalAlignment="Center"/>
+                                        <Border x:Name="bar1" Height="50" Width="35" Background="#2E78A6" CornerRadius="8,8,0,0" Margin="0,5"/>
+                                        <TextBlock Text="Nội" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+                                    <StackPanel VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="txtVal2" Text="0" HorizontalAlignment="Center"/>
+                                        <Border x:Name="bar2" Height="50" Width="35" Background="#10B981" CornerRadius="8,8,0,0" Margin="0,5"/>
+                                        <TextBlock Text="Ngoại" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+                                    <StackPanel VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="txtVal3" Text="0" HorizontalAlignment="Center"/>
+                                        <Border x:Name="bar3" Height="50" Width="35" Background="#F59E0B" CornerRadius="8,8,0,0" Margin="0,5"/>
+                                        <TextBlock Text="Sản/Nhi" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+                                    <StackPanel VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="txtVal4" Text="0" HorizontalAlignment="Center"/>
+                                        <Border x:Name="bar4" Height="50" Width="35" Background="#64748B" CornerRadius="8,8,0,0" Margin="0,5"/>
+                                        <TextBlock Text="Khác" HorizontalAlignment="Center" FontSize="10"/>
+                                    </StackPanel>
+                                </UniformGrid>
+                            </Border>
+                            <UniformGrid Grid.Row="2" Columns="2" Rows="2">
+                                <Border Background="#E0F2FE" Margin="5" CornerRadius="12">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="TỔNG NV" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="txtStatTotalEmp" Text="0" FontSize="35" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#F0FDF4" Margin="5" CornerRadius="12">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="BÁC SĨ" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="txtStatDoctors" Text="0" FontSize="35" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#FFF7ED" Margin="5" CornerRadius="12">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="SỐ KHOA" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="txtStatDeparts" Text="0" FontSize="35" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#F1F5F9" Margin="5" CornerRadius="12">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="GIỜ" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="txtClock" Text="00:00:00" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="gridHRData" Background="White" CornerRadius="15" Visibility="Collapsed">
+                        <Grid Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid Margin="0,0,0,15">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btnHRAddNew" Content="+ Thêm Mới" Click="btnHRAddNew_Click" Style="{StaticResource RoundedBtn}" Width="120" Height="38" Margin="0,0,10,0"/>
+                                    <Button Content="📥 Xuất File" Click="btnHRExport_Click" Style="{StaticResource RoundedBtn}" Background="#059669" Width="120" Height="38"/>
+                                </StackPanel>
+                                <Border HorizontalAlignment="Right" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="10" Padding="10,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox x:Name="txtHRSearch" Width="180" BorderThickness="0" VerticalContentAlignment="Center"/>
+                                        <Button Content="🔍" Background="Transparent" BorderThickness="0" Click="btnHRSearch_Click"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                            <DataGrid x:Name="dgHRMain" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="True" Background="White" RowHeight="35"/>
+                            <StackPanel x:Name="stkHRActions" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                                <Button Content="Cập Nhật" Click="btnHRUpdate_Click" Style="{StaticResource RoundedBtn}" Width="100" Height="38" Margin="0,0,10,0"/>
+                                <Button Content="Xóa" Click="btnHRDelete_Click" Style="{StaticResource RoundedBtn}" Background="#EF4444" Width="100" Height="38"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
